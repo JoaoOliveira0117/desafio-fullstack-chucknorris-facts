@@ -1,21 +1,18 @@
-import Text from '../components/Text';
+import FactsWrapper from '../components/FactsWrapper';
+import PageWrapper from '../components/PageWrapper';
 
-const getJokeById = (id: string) => {
+const getFactById = (id: string) => {
   return fetch('https://api.chucknorris.io/jokes/' + id)
     .then((res) => res.json())
-    .then((res) => res.value);
+    .then((res) => res as Fact);
 };
 
-export default function Id({ params }: { params: { id: string } }) {
-  const joke = getJokeById(params.id);
+export default async function Id({ params }: { params: { id: string } }) {
+  const fact = await getFactById(params.id);
 
   return (
-    <div>
-      <div className="max-w-2xl">
-        <Text variant="h6" className="py-2">
-          {joke}
-        </Text>
-      </div>
-    </div>
+    <PageWrapper>
+      <FactsWrapper facts={[fact]} />
+    </PageWrapper>
   );
 }

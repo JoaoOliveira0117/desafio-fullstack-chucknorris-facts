@@ -19,10 +19,10 @@ bun dev
 ## Requirements
 
 - [x] Use Git;
-- [ ] Use ReactJS;
-- [ ] Use Typescript;
-- [ ] Create reusable components;
-- [ ] Use Tailwind;
+- [x] Use ReactJS;
+- [x] Use Typescript;
+- [x] Create reusable components;
+- [x] Use Tailwind;
 - [ ] E2E testing using Cypress;
 - [ ] Deploy;
 - [x] Listen to [`The Diner - Billie Eilish` on Spotify](https://open.spotify.com/intl-pt/track/1LLUoftvmTjVNBHZoQyveF?si=1d601d0bac304eb6);

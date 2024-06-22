@@ -1,21 +1,18 @@
-import Text from '../components/Text';
+import FactsWrapper from '../components/FactsWrapper';
+import PageWrapper from '../components/PageWrapper';
 
-const getRandomJoke = () => {
+const getRandomFact = () => {
   return fetch('https://api.chucknorris.io/jokes/random?category=dev', { cache: 'no-cache' })
     .then((res) => res.json())
-    .then((res) => res.value);
+    .then((res) => res as Fact);
 };
 
-export default function Random() {
-  const joke = getRandomJoke();
+export default async function Random() {
+  const fact = await getRandomFact();
 
   return (
-    <div>
-      <div className="max-w-2xl">
-        <Text variant="h6" className="py-2">
-          {joke}
-        </Text>
-      </div>
-    </div>
+    <PageWrapper>
+      <FactsWrapper facts={[fact]} />
+    </PageWrapper>
   );
 }

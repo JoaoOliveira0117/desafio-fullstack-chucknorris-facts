@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, Fira_Code } from 'next/font/google';
 import './globals.css';
-import Text from './components/Text';
+import Header from './components/Header';
+import Container from './components/Container';
 
 const inter = Inter({ subsets: ['latin'] });
 const firaCode = Fira_Code({ subsets: ['latin'] });
@@ -19,12 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${firaCode.className}`}>
-        <main className="flex flex-col items-center min-h-screen p-20 xs:p-24">
-          <Text variant="h3" className="text-jet-default">
-            Cool Chuck Norris Facts!
-          </Text>
+        <Container>
+          <Header />
           {children}
-        </main>
+        </Container>
       </body>
     </html>
   );
