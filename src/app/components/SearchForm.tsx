@@ -1,15 +1,16 @@
 import { FC, useState } from 'react';
 import Form from './dummies/Form';
 import SearchInput from './SearchInput';
+import Api from '@/http/api';
 
 type SearchFormProps = {
-  onResult: (result: any) => void;
+  onResult: (result: Fact[]) => void;
 };
 
 const SearchForm: FC<SearchFormProps> = ({ onResult }) => {
   const [shake, setShake] = useState(false);
 
-  const handleSubmit = (values: Record<string, string>) => {
+  const handleSubmit = async (values: Record<string, string>) => {
     const body = values as { search: string };
     if (!body.search) {
       setShake(true);
@@ -17,9 +18,8 @@ const SearchForm: FC<SearchFormProps> = ({ onResult }) => {
       return;
     }
 
-    fetch(`https://api.chucknorris.io/jokes/search?query=${body.search}`, { cache: 'force-cache' })
-      .then((res) => res.json())
-      .then((res) => onResult(res.result.slice(0, 5)));
+    const { data } = await new Api().getFactsBySearchQuery(body.search);
+    onResult(data.fact);
   };
 
   return (

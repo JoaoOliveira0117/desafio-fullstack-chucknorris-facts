@@ -5,7 +5,7 @@ import SearchForm from './components/SearchForm';
 import FactsWrapper from './components/FactsWrapper';
 
 export default function Home() {
-  const [apiResponse, setApiResponse] = useState<[]>([]);
+  const [apiResponse, setApiResponse] = useState<Fact[]>([]);
 
   return (
     <PageWrapper>
