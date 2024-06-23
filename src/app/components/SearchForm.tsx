@@ -1,7 +1,22 @@
 import { FC, useState } from 'react';
 import Form from './dummies/Form';
 import SearchInput from './SearchInput';
-import Api from '@/http/api';
+import { gql } from '@apollo/client';
+import client from '@/http/apolloClient';
+
+const GET_FACTS_BY_QUERY = gql`
+  query GetFactsByQuery($search: String!) {
+    factsByQuery(search: $search) {
+      id
+      value
+      categories
+    }
+  }
+`;
+
+type factsByQueryType = {
+  factsByQuery: Fact[];
+};
 
 type SearchFormProps = {
   onResult: (result: Fact[]) => void;
@@ -18,8 +33,14 @@ const SearchForm: FC<SearchFormProps> = ({ onResult }) => {
       return;
     }
 
-    const { data } = await new Api().getFactsBySearchQuery(body.search);
-    onResult(data.fact);
+    const result = await (
+      await client.query
+    )<factsByQueryType>({
+      query: GET_FACTS_BY_QUERY,
+      variables: { search: body.search },
+    });
+
+    onResult(result.data.factsByQuery);
   };
 
   return (
