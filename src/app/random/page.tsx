@@ -1,14 +1,10 @@
-import Api from '@/http/api';
-import FactsWrapper from '../components/FactsWrapper';
 import PageWrapper from '../components/PageWrapper';
+import RandomFactsWrapper from '../components/RandomFactsWrapper';
 
 export default async function Random() {
-  const { data } = await new Api().getRandomFact();
-  console.log(data);
-
   return (
     <PageWrapper>
-      <FactsWrapper facts={[data.fact]} />
+      <RandomFactsWrapper />
     </PageWrapper>
   );
 }
